@@ -6,19 +6,53 @@
 	    <link rel="stylesheet" type="text/css" href="groceries.css">
     </head>
     <body class="groceries">
-        <main class="groceries-view"></main>
-            <div class="list-details">
-                <h1>My Grocery List</h1>
-                <p>apple</p>
-                <p>pineapple</p>
-                <p>blue berries</p>
-                <p>strawberries</p>
-                <p>rasberries</p>
-                <p>cucumber</p>
-                <p>kale</p>
-                <p>spinach</p>
-                <p>carrots</p>
-                <p>celery</p>
-            </div>
+        <h1>Grocery List</h1>
+        
+        <script>
+            var cart = []; 
+            var Item = function(name, price, count) {
+                this.name = name;
+                this.price = price;
+                this.count = count;
+            }; 
+
+            function addItemToCart(name, price, count) {
+                for (var i in cart) {
+                    if (cart[i].name === name) {
+                        cart[i].count += count;
+                        return; 
+                    }
+                 }
+                var item  = new Item(name, price, count);
+                cart.push(item); 
+            } 
+
+            addItemToCart("Apple", 1.22, 1); 
+            addItemToCart("Pear", 1.72, 3);
+            addItemToCart("Apple", 1.22, 1);
+            addItemToCart("Apple", 1.22, 3); 
+
+
+            console.log(cart);
+            console.log(cart[0]);
+            console.log(cart[0].name);
+
+            // removeItemFromCart(name) // Removes one item
+
+            // removeItemFromCartAll(name) // Removes all item name
+
+            // clearCart() // clears cart
+
+            // countCart() // return total count
+
+            // totalCart() // return total cost
+
+            // listCart() // returns array of all Item
+
+            // saveCart() // saves cart to local storage
+
+            // loadCart // loads saved cart in local storage
+
+        </script>
     </body>
 </html>

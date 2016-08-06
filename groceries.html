@@ -24,7 +24,8 @@
                     }
                  }
                 var item  = new Item(name, price, count);
-                cart.push(item); 
+                cart.push(item);
+                saveCart();  
             } 
 
             
@@ -38,6 +39,7 @@
                         break; 
                     }
                 }
+                saveCart(); 
             }
 
         
@@ -48,27 +50,12 @@
                         break;
                     }
                 }
+                saveCart(); 
             } 
 
-            addItemToCart("Apple", 1.22, 1); 
-            addItemToCart("Pear", 1.72, 3);
-            addItemToCart("Apple", 1.22, 1);
-            addItemToCart("Apple", 1.22, 3);
-            addItemToCart("Bananna", 1.00, 1); 
-            addItemToCart("Car", 34.00, 1);
-            addItemToCart("Plush Toy", 5.82, 1);
-            addItemToCart("Sticky Notes", 4.00, 3);  
-
-            console.log(cart.length);
-            console.log(cart);
-            
-            removeItemFromCartAll("Car");
-            
-            console.log(cart.length); 
-            console.log(cart);
-
             function clearCart() {  // clears cart
-                cart = []; 
+                cart = [];
+                saveCart();  
             } 
 
             // clearCart(); 
@@ -110,10 +97,6 @@
                 return cartCopy;
                 // Can't do return cart; or return cart.slice(); Rememeber arrays and objects are always a reference. 
             } 
-            
-            var array = listCart(); 
-            array[0].name = "Mistake"; 
-            console.log(array);
 
 
             /*var a = ["A", "B", "C"];
@@ -122,9 +105,19 @@
             console.log(a);
             console.log(b);*/  //This is why we don't do return cart; in listCart(); 
 
-            // saveCart() // saves cart to local storage
+            function saveCart() {  // saves cart to local storage
+                localStorage.setItem("shoppingCart", JSON.stringify(cart)); //converts arrays/obj's into a json string
+            } 
 
-            // loadCart // loads saved cart in local storage
+            
+            function loadCart() {  // loads saved cart in local storage
+                cart = JSON.parse(localStorage.getItem("shoppingCart"));
+            } 
+
+            loadCart();
+
+            var array = listCart(); 
+            console.log(array); 
 
         </script>
     </body>

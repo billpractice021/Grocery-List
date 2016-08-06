@@ -148,13 +148,6 @@
                 // Can't do return cart; or return cart.slice(); Rememeber arrays and objects are always a reference. 
             } 
 
-
-            /*var a = ["A", "B", "C"];
-            var b = a.slice(); the slice method without any parameters will create a copy of var a (new array 2 seperate arrays). Same concept applies to objects except you can't use slice that applies to arrays.. 
-            b.push("D"); 
-            console.log(a);
-            console.log(b);*/  //This is why we don't do return cart; in listCart(); 
-
             function saveCart() {  // saves cart to local storage
                 localStorage.setItem("shoppingCart", JSON.stringify(cart)); //converts arrays/obj's into a json string
             } 

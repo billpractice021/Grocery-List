@@ -27,27 +27,100 @@
                 cart.push(item); 
             } 
 
+            
+            function removeItemFromCart(name) { // Removes one particular item from a cart
+                for (var i in cart) {
+                    if (cart[i].name === name) {
+                        cart[i].count--; //cart[i].count = cart[i].count = cart[i].count -1 (same thing)
+                        if (cart[i].count === 0) {
+                            cart.splice(i, 1); //can also call removeItemFromCartAll(); here so that you don't duplicate code
+                        }
+                        break; 
+                    }
+                }
+            }
+
+        
+            function removeItemFromCartAll(name) {  // Removes all item name (a particular item)
+                for (var i in cart) {
+                    if (cart[i].name === name) {
+                        cart.splice(i, 1); 
+                        break;
+                    }
+                }
+            } 
+
             addItemToCart("Apple", 1.22, 1); 
             addItemToCart("Pear", 1.72, 3);
             addItemToCart("Apple", 1.22, 1);
-            addItemToCart("Apple", 1.22, 3); 
+            addItemToCart("Apple", 1.22, 3);
+            addItemToCart("Bananna", 1.00, 1); 
+            addItemToCart("Car", 34.00, 1);
+            addItemToCart("Plush Toy", 5.82, 1);
+            addItemToCart("Sticky Notes", 4.00, 3);  
 
-
+            console.log(cart.length);
             console.log(cart);
-            console.log(cart[0]);
-            console.log(cart[0].name);
+            
+            removeItemFromCartAll("Car");
+            
+            console.log(cart.length); 
+            console.log(cart);
 
-            // removeItemFromCart(name) // Removes one item
+            function clearCart() {  // clears cart
+                cart = []; 
+            } 
 
-            // removeItemFromCartAll(name) // Removes all item name
+            // clearCart(); 
+            // console.log(cart);
 
-            // clearCart() // clears cart
+            
+            function countCart() { // return total count
+                var totalCount = 0; 
+                for (var i in cart) {
+                    totalCount += cart[i].count
+                }
+                return totalCount; 
+            }
+            
+            console.log(countCart());
 
-            // countCart() // return total count
+            
+            function totalCart() {  // return total cost
+                var totalCost = 0;
+                for (var i in cart) {
+                    totalCost += cart[i].price;
+                }
+                return totalCost;
+            } 
 
-            // totalCart() // return total cost
+            console.log(totalCart());
 
-            // listCart() // returns array of all Item
+            
+            function listCart() {  // returns array of all Items
+                var cartCopy = [];
+                for (var i in cart) {
+                    var item = cart[i]; 
+                    var itemCopy = {};
+                    for (var p in item) {
+                        itemCopy[p] = item[p];
+                    }
+                    cartCopy.push(itemCopy); 
+                } 
+                return cartCopy;
+                // Can't do return cart; or return cart.slice(); Rememeber arrays and objects are always a reference. 
+            } 
+            
+            var array = listCart(); 
+            array[0].name = "Mistake"; 
+            console.log(array);
+
+
+            /*var a = ["A", "B", "C"];
+            var b = a.slice(); the slice method without any parameters will create a copy of var a (new array 2 seperate arrays). Same concept applies to objects except you can't use slice that applies to arrays.. 
+            b.push("D"); 
+            console.log(a);
+            console.log(b);*/  //This is why we don't do return cart; in listCart(); 
 
             // saveCart() // saves cart to local storage
 

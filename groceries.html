@@ -39,13 +39,17 @@
         }); 
         
         function displayCart() {
+            console.log("*** Display Cart ***");
             var cartArray = listCart();
+            console.log("*** Count Cart: " + cartArray.length);
+            
             var output = "";  
             for (var i in cartArray) {
                 output += "<li>" + cartArray[i].name + " " + cartArray[i].count + "</li>"
             }
             $("#show-cart").html(output);
         }
+
 
         
         // **********************************************
@@ -86,6 +90,7 @@
                 saveCart(); 
             }
 
+
         
             function removeItemFromCartAll(name) {  // Removes all item name (a particular item)
                 for (var i in cart) {
@@ -96,6 +101,7 @@
                 }
                 saveCart(); 
             } 
+            
 
             function clearCart() {  // clears cart
                 cart = [];
@@ -114,7 +120,7 @@
                 return totalCount; 
             }
             
-            console.log(countCart());
+            // console.log(countCart());
 
             
             function totalCart() {  // return total cost
@@ -125,7 +131,7 @@
                 return totalCost;
             } 
 
-            console.log(totalCart());
+            // console.log(totalCart());
 
             
             function listCart() {  // returns array of all Items
@@ -159,8 +165,10 @@
             } 
 
             loadCart();
+            displayCart(); 
 
             var array = listCart(); 
+            console.log("-----------------");
             console.log(array); 
 
         </script>

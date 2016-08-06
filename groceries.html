@@ -24,10 +24,12 @@
             <ul id="show-cart">
                 
             </ul>
+            <div>Total Cart:$<span id="total-cart"></span></div>
         </div>
 
         
         <script>
+
 
         $(".add-to-cart").click(function(event){
             event.preventDefault(); 
@@ -37,18 +39,23 @@
             addItemToCart(name, price, 1);
             displayCart(); 
         }); 
+
+        $("#clear-cart").click(function(event) {
+            clearCart();
+            displayCart();  
+        });
         
         function displayCart() {
-            console.log("*** Display Cart ***");
             var cartArray = listCart();
-            console.log("*** Count Cart: " + cartArray.length);
-            
             var output = "";  
             for (var i in cartArray) {
-                output += "<li>" + cartArray[i].name + " " + cartArray[i].count + "</li>"
+                output += "<li>" + cartArray[i].name + " " + cartArray[i].count + " x " + cartArray[i].price + " = " + cartArray[i].total + "</li>"
             }
             $("#show-cart").html(output);
+            $("#total-cart").html(totalCart());
+
         }
+
 
 
         
@@ -68,6 +75,7 @@
                 for (var i in cart) {
                     if (cart[i].name === name) {
                         cart[i].count += count;
+                        saveCart(); // Fixed mistake 
                         return; 
                     }
                  }
@@ -126,9 +134,9 @@
             function totalCart() {  // return total cost
                 var totalCost = 0;
                 for (var i in cart) {
-                    totalCost += cart[i].price;
+                    totalCost += cart[i].price * cart[i].count;
                 }
-                return totalCost;
+                return totalCost.toFixed(2);
             } 
 
             // console.log(totalCart());
@@ -142,6 +150,7 @@
                     for (var p in item) {
                         itemCopy[p] = item[p];
                     }
+                    itemCopy.total = (item.price * item.count).toFixed(2); 
                     cartCopy.push(itemCopy); 
                 } 
                 return cartCopy;
@@ -159,10 +168,6 @@
 
             loadCart();
             displayCart(); 
-
-            var array = listCart(); 
-            console.log("-----------------");
-            console.log(array);   
 
         </script>
         <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>

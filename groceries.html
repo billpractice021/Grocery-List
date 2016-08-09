@@ -49,7 +49,20 @@
             var cartArray = BM_shoppingCart.listCart();
             var output = "";  
             for (var i in cartArray) {
-                output += "<li>" + cartArray[i].name + " " + cartArray[i].count + " x " + cartArray[i].price + " = " + cartArray[i].total + " <button class='plus-item' data-name='" + cartArray[i].name + "'>+</button> " + "<button class='subtract-item' data-name='" + cartArray[i].name + "'>-</button> " + " <button class='delete-item' data-name='" + cartArray[i].name + "'>X</button> " + "</li>"
+                output += "<li>" 
+                    +cartArray[i].name 
+                    +" <input class='item-count' type='number' data-name='" 
+                    +cartArray[i].name 
+                    +"' value='"+cartArray[i].count+"' >" 
+                    +" x "+cartArray[i].price 
+                    +" = "+cartArray[i].total 
+                    +"<button class='plus-item' data-name='" 
+                    +cartArray[i].name+"'>+</button>" 
+                    +"<button class='subtract-item' data-name='" 
+                    +cartArray[i].name+"'>-</button>" 
+                    +"<button class='delete-item' data-name='" 
+                    +cartArray[i].name+"'>X</button>" 
+                    +"</li>";
             }
             $("#show-cart").html(output);
             $("#count-cart").html(BM_shoppingCart.countCart()); 
@@ -72,6 +85,13 @@
         $("#show-cart").on("click", ".plus-item", function(event) {
             var name = $(this).attr("data-name"); 
             BM_shoppingCart.addItemToCart(name, 0, 1);
+            displayCart();  
+        });
+
+        $("#show-cart").on("change", ".item-count", function(event) {
+            var name = $(this).attr("data-name");
+            var count = Number($(this).val());
+            BM_shoppingCart.setCountForItem(name, count);
             displayCart();  
         });
 
@@ -105,6 +125,17 @@
             this.cart.push(item);
             this.saveCart();  
         };
+
+
+        BM_shoppingCart.setCountForItem = function(name, count) {
+            for (var i in this.cart) {
+                if (this.cart[i].name === name) {
+                    this.cart[i].count = count; 
+                    break;
+                }
+            }
+            this.saveCart(); 
+        }; 
 
 
         BM_shoppingCart.removeItemFromCart = function(name) { // Removes one particular item from a cart

@@ -24,6 +24,7 @@
             <ul id="show-cart">
                 <li>??????</li>
             </ul>
+            <div>You have <span id="count-cart">X</span> items in your cart</div>
             <div>Total Cart:$<span id="total-cart"></span></div>
         </div>
 
@@ -51,8 +52,9 @@
                 output += "<li>" + cartArray[i].name + " " + cartArray[i].count + " x " + cartArray[i].price + " = " + cartArray[i].total + " <button class='plus-item' data-name='" + cartArray[i].name + "'>+</button> " + "<button class='subtract-item' data-name='" + cartArray[i].name + "'>-</button> " + " <button class='delete-item' data-name='" + cartArray[i].name + "'>X</button> " + "</li>"
             }
             $("#show-cart").html(output);
+            $("#count-cart").html(BM_shoppingCart.countCart()); 
             $("#total-cart").html(BM_shoppingCart.totalCart());
-
+            
         }
         
         $("#show-cart").on("click", ".delete-item", function(event) {

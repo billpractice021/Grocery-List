@@ -26,9 +26,9 @@
             </ul>
             <div>You have <span id="count-cart">X</span> items in your cart</div>
             <div>Total Cart:$<span id="total-cart"></span></div>
-        </div>  
+        </div>
 
-        
+        <script src="styles/groceries.js"></script>
         <script>
             
         $(".add-to-cart").click(function(event){
@@ -95,142 +95,37 @@
             displayCart();  
         });
 
-
-
-        
-        // **********************************************
-        // Shopping Cart functions
-
-        var BM_shoppingCart = {};
-        
-        BM_shoppingCart.cart = []; 
-        
-       
-        BM_shoppingCart.Item = function(name, price, count) {
-            this.name = name;
-            this.price = price;
-            this.count = count;
-        };
-        
-        
-        BM_shoppingCart.addItemToCart = function(name, price, count) {
-            for (var i in this.cart) {
-                if (this.cart[i].name === name) {
-                    this.cart[i].count += count;
-                    this.saveCart(); // Fixed mistake 
-                    return; 
-                }
-            }
-            var item  = new this.Item(name, price, count);
-            this.cart.push(item);
-            this.saveCart();  
-        };
-
-
-        BM_shoppingCart.setCountForItem = function(name, count) {
-            for (var i in this.cart) {
-                if (this.cart[i].name === name) {
-                    this.cart[i].count = count; 
-                    break;
-                }
-            }
-            this.saveCart(); 
-        }; 
-
-
-        BM_shoppingCart.removeItemFromCart = function(name) { // Removes one particular item from a cart
-            for (var i in this.cart) {
-                if (this.cart[i].name === name) {
-                    this.cart[i].count--; //cart[i].count = cart[i].count = cart[i].count -1 (same thing)
-                    if (this.cart[i].count === 0) {
-                        this.cart.splice(i, 1); //can also call removeItemFromCartAll(); here so that you don't duplicate code
-                    }
-                    break; 
-                }
-            }
-            this.saveCart(); 
-        };
-
-
-        BM_shoppingCart.removeItemFromCartAll = function(name) {  // Removes all item name (a particular item)
-            for (var i in this.cart) {
-                if (this.cart[i].name === name) {
-                    this.cart.splice(i, 1); 
-                    break;
-                }
-            }
-            this.saveCart(); 
-        }; 
-        
-
-        BM_shoppingCart.clearCart = function() {  // clears cart
-            this.cart = [];
-            this.saveCart();  
-        }; 
-
-        // clearCart(); 
-        // console.log(cart);       
-
-        
-        BM_shoppingCart.countCart = function() { // return total count
-            var totalCount = 0; 
-            for (var i in this.cart) {
-                totalCount += this.cart[i].count
-            }
-            return totalCount; 
-        }
-        
-        // console.log(countCart());  
-
-            
-        
-        BM_shoppingCart.totalCart = function() {  // return total cost
-            var totalCost = 0;
-            for (var i in this.cart) {
-                totalCost += this.cart[i].price * this.cart[i].count;
-            }
-            return totalCost.toFixed(2);
-        }; 
-
-        // console.log(totalCart());  
-        
-
-        BM_shoppingCart.listCart = function() {  // returns array of all Items
-            var cartCopy = [];
-            for (var i in this.cart) {
-                var item = this.cart[i]; 
-                var itemCopy = {};
-                for (var p in item) {
-                    itemCopy[p] = item[p];
-                }
-                itemCopy.total = (item.price * item.count).toFixed(2); 
-                cartCopy.push(itemCopy); 
-            } 
-            return cartCopy;
-            // Can't do return cart; or return cart.slice(); Rememeber arrays and objects are always a reference. 
-        };
-            
-            
-        
-        BM_shoppingCart.saveCart = function() {  // saves cart to local storage
-            localStorage.setItem("shoppingCart", JSON.stringify(this.cart)); //converts arrays/obj's into a json string
-        };
-            
-
-        
-        BM_shoppingCart.loadCart = function() {  // loads saved cart in local storage
-            this.cart = JSON.parse(localStorage.getItem("shoppingCart"));
-        }; 
-
-        BM_shoppingCart.loadCart(); 
         displayCart();
 
-        console.log("Shopping Cart: Cart");
-        console.log(BM_shoppingCart.cart);
+        
+        /*
+        var test = (function() {
+            var cart = [];
+            var obj = {};
+            
+            obj.addItem = function(name) {
+                cart.push(name); 
+            }
+            
+            obj.countCart = function() {
+                console.log("test cart"+" "+cart.length);
+            }
+            return obj; 
+        })();
+
+        test.addItem("Foo");
+        test.addItem("Bar"); 
+        test.countCart(); 
+        console.log(test.cart); 
+        */
+      
+
+
+        // console.log("Shopping Cart: Cart");
+        // console.log(BM_shoppingCart.cart);
         // console.log("Global Cart:");
         // console.log(cart);   
             
         </script>
-        <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
     </body>
 </html>

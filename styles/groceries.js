@@ -1,4 +1,4 @@
-var BM_shoppingCart = (function(){  // If anyone wants to use this they have to access this module name. In this case they
+var BM_shoppingCart = (function(){  // If anyone wants to use this they have to access this module name which is BM_ShoppingCart. In this case they
 // say BM_shoppingCart.addItemToCart to acces my info. All info in the private sections cannot be seen bu other user. All info
 // in public API is accessible to another user. 
     // Private Methods and properties

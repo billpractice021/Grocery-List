@@ -1,4 +1,6 @@
-var BM_shoppingCart = (function(){
+var BM_shoppingCart = (function(){  // If anyone wants to use this they have to access this module name. In this case they
+// say BM_shoppingCart.addItemToCart to acces my info. All info in the private sections cannot be seen bu other user. All info
+// in public API is accessible to another user. 
     // Private Methods and properties
     var cart = []; 
 
@@ -9,18 +11,19 @@ var BM_shoppingCart = (function(){
     };
 
     function saveCart() {  // saves cart to local storage
-        localStorage.setItem("shoppingCart", JSON.stringify(cart)); //converts arrays/obj's into a json string
+        localStorage.setItem("shoppingCart", JSON.stringify(cart)); // converts arrays/obj's into a json string
     };
     
     function loadCart() {  // loads saved cart in local storage
-        this.cart = JSON.parse(localStorage.getItem("shoppingCart"));
+        this.cart = JSON.parse(localStorage.getItem("shoppingCart")); // Coverting it back to a JSON object. 
     }; 
 
     loadCart(); 
 
 
-    // Private Methods and properties
-    var obj = {};
+    // Public Methods and properties
+    var obj = {}; // Public API as long as you return it at the end. Could also do this.addItemToCart but not
+    // recommended. 
 
     obj.addItemToCart = function(name, price, count) {
         for (var i in cart) {
@@ -112,8 +115,10 @@ var BM_shoppingCart = (function(){
         // Can't do return cart; or return cart.slice(); Remember arrays and objects are always a reference. 
     };  
 
-    return obj;
+    return obj;  // also can see this returned with an anymnmous obj(). 
 })(); 
+
+// Browserfy takes your code from back-end and coverts it to closures. 
 
 
 
